@@ -22,7 +22,7 @@ namespace Dashboard.Controllers
 
             return RedirectToAction("Index");
         }
-        [Authorize]
+       // [Authorize]
         public IActionResult Index()
         {
             var pro = _context.Product.ToList();
