@@ -12,10 +12,15 @@ namespace Dashboard.Data
 
         public DbSet<Product> Product { get; set; }
 
-        public DbSet<Customer> customer { get; set; }
+        public DbSet<Customer> Customer { get; set; }
 
-        public DbSet<ProductDetails> productDetails { get; set; }
+        public DbSet<ProductDetails> ProductDetails { get; set; }
 
-        public DbSet<Invoice> invoice { get; set; }
+        public DbSet<Invoice> Invoice { get; set; }
+
+        public DbSet<Cart> Cart { get; set; }
+        public DbSet<Payments> Payments { get; set; }
+
+        
     }
 }

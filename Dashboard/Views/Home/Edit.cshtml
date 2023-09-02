@@ -1,12 +1,10 @@
 ﻿
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
 @{
-	ViewData["Title"] = "Home Page";
-	var productd = ViewBag.Prod;
-	var product = ViewBag.product;
-	
-
+    var Productd = ViewBag.P;
 }
-
 
 
 
@@ -106,7 +104,7 @@
 									<!--begin:Menu item-->
 									<div class="menu-item">
 										<!--begin:Menu link-->
-										<a class="menu-link">
+										<a class="menu-link" href="../../demo1/dist/dashboards/marketing.html">
 											<span class="menu-bullet">
 												<span class="bullet bullet-dot"></span>
 											</span>
@@ -160,184 +158,53 @@
 								<!--begin::Card title-->
 								<div class="card-title">
 									<!--begin::Search-->
-									
+								
 									<!--end::Search-->
 								</div>
 								<!--begin::Card title-->
 								<!--begin::Card toolbar-->
 								<div class="card-toolbar">
 									<!--begin::Toolbar-->
-									<div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-										<!--begin::Filter-->
-										<div class="w-150px me-3">
-											<!--begin::Select2-->
-										<form asp-action="ProductDetails" method="post">
-												<select name="Id" class="form-select form-select-solid" onchange="this.form.submit()" data-control="select2" data-hide-search="true" data-placeholder="Status" data-kt-ecommerce-order-filter="status">
-													<option></option>
-
-													@foreach (var selec in product)
-													{
-														<option value="@selec.Id">@selec.ProductName</option>
-
-													}
-												</select>
-
-
-											</form>
-														<!--end::Select2-->
-										</div>
-										<!--end::Filter-->
-
-										<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal"> إضافة تفاصيل منتج</button>
-										<!--end::Add customer-->
-									</div>
 									<!--end::Toolbar-->
 									<!--begin::Group actions-->
-									<div class="d-flex justify-content-end align-items-center d-none" data-kt-customer-table-toolbar="selected">
-										<div class="fw-bold me-5">
-											<span class="me-2" data-kt-customer-table-select="selected_count"></span>Selected
-										</div>
-										<button type="button" class="btn btn-danger" data-kt-customer-table-select="delete_selected">Delete Selected</button>
-									</div>
+									
 									<!--end::Group actions-->
 								</div>
 								<!--end::Card toolbar-->
 							</div>
 							<!--end::Card header-->
 							<!--begin::Card body-->
-							<div class="card-body pt-0 table-responsive">
-								<h1>@ViewBag.email</h1>
-								<!--begin::Table-->
-								<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
-									<!--begin::Table head-->
-									<thead>
-										<!--begin::Table row-->
-										<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-											<th class="min-w-125px text-end" style="font-family:cairo"> اسم المنتج </th>
-											<th class="min-w-125px text-end" style="font-family:cairo">الوصف  </th>
-											<th class="min-w-125px text-end" style="font-family:cairo">السعر </th>
-											<th class="min-w-125px text-end" style="font-family:cairo">الموديل</th>
-											<th class="min-w-125px text-end" style="font-family:cairo">اللون</th>
+							<div class="card-body pt-0">
+								
+								<form asp-action="Edit" method="post">
+									<input type="hidden" name="Id" value="@Productd.Id" />
+									<input type="hidden" name="ProductId"/>
 
-											<th class="min-w-125px text-end" style="font-family:cairo">الكمية</th>
-											<th class="min-w-125px text-end" style="font-family:cairo">صورة المنتج</th>
-											<th colspan="2" class="min-w-125px text-end" style="font-family:cairo">الإجراء</th>
+									<label for="Description">وصف المنتج</label>
+									<input type="text" name="Description" class="form-control" value="@Productd.Description" />
 
-										</tr>
-										<!--end::Table row-->
-									</thead>
-									<!--end::Table head-->
-									<!--begin::Table body-->
-									<tbody class="fw-semibold text-gray-600">
-									
+									<label for="Price">سعر المنتج</label>
+									<input type="text" name="Price" class="form-control" value="@Productd.Price" />
 
-										@foreach (var item in productd)
-										{
-											@foreach (var name in product)
-											{
-												@if(name.Id == item.ProductId)
-												{
-													<tr>
-				
-														<td>@name.ProductName</td>
-														<td>@item.Description</td>
-														<td>@item.Price</td>
-														<td>@item.Model</td>
+									<label for="Model">طراز المنتج</label>
+									<input type="text" name="Model" class="form-control" value="@Productd.Model" />
 
-														<td>@item.Color</td>
-														<td>@item.Qty</td>
-														<td><a href="@item.Image" target="_blank" >هنا</a></td>
-														<td><a asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
-														<td><a asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
-													</tr>
-												}
-											}
-											
-										}
+									<label for="Color">لون المنتج</label>
+									<input type="text" name="Color" class="form-control" value="@Productd.Color" />
+
+									<label for="Image">صورة المنتج</label>
+									<input type="text" name="Image" class="form-control" value="@Productd.Image" />
+
+									<button type="submit" class="btn btn-primary">تحديث</button>
+								</form>
 
 
-
-									</tbody>
-									<!--end::Table body-->
-								</table>
-								<!--end::Table-->
 							</div>
 							<!--end::Card body-->
 						</div>
 
 
-						<!-- Button trigger modal -->
-						<div class="modal fade" id="myModal">
-							<div class="modal-dialog modal-lg">
-								<div class="modal-content">
-
-									<!-- Modal Header -->
-									<div class="modal-header">
-										<h4 class="modal-title">إضافة تفاصيل منتج</h4>
-										<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-									</div>
-
-									<!-- Modal body -->
-									<div class="modal-body">
-										 
-
-                                  <form class="form" method="post" id="kt_modal_add_customer_form" asp-action="CreateDetalis">
-
-
-											<select name="ProductId">
-											@foreach (var a in product)
-											{
-													<option value="@a.Id">@a.ProductName</option>
-											}
-										</select>
-
-											<div class="container">
-												<div class="row">
-													<div class="col">
-														<label for="Description">وصف المنتج</label>
-														<input type="text" name="Description" class="form-control" />
-													</div>
-													<div class="col">
-														<label for="Price">سعر المنتج</label>
-														<input type="text" name="Price" class="form-control" />
-													</div>
-													<div class="col">
-														<label for="Model">طراز المنتج</label>
-														<input type="text" name="Model" class="form-control" />
-													</div>
-												</div>
-
-												<div class="row">
-													<div class="col">
-														<label for="Color">لون المنتج</label>
-														<input type="text" name="Color" class="form-control" />
-													</div>
-													<div class="col">
-														<label for="Qty">الكمية</label>
-														<input type="text" name="Qty" class="form-control" />
-													</div>
-
-													<div class="col">
-														<label for="Image">صورة المنتج</label>
-														<input type="text" name="Image" class="form-control" />
-													</div>
-												</div>
-
-											</div>
-
-											<button type="submit" class="btn btn-primary mt-3">حفظ</button>
-
-										</form>
-									</div>
-
-									<!-- Modal footer -->
-									<div class="modal-footer">
-										<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-									</div>
-
-								</div>
-							</div>
-						</div>
+					
 
 
 
@@ -350,16 +217,5 @@
 		</div>
 	</div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
 
 

@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Dashboard.Migrations
+namespace Dashboard.Migrations.DashDb
 {
     [DbContext(typeof(DashDbContext))]
-    [Migration("20230817213842_Dash")]
-    partial class Dash
+    [Migration("20230829213220_dashnew")]
+    partial class dashnew
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,7 +49,7 @@ namespace Dashboard.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("customer");
+                    b.ToTable("Customer");
                 });
 
             modelBuilder.Entity("Dashboard.Models.Invoice", b =>
@@ -83,7 +83,7 @@ namespace Dashboard.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("invoice");
+                    b.ToTable("Invoice");
                 });
 
             modelBuilder.Entity("Dashboard.Models.Product", b =>
@@ -95,7 +95,6 @@ namespace Dashboard.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ProductName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -112,19 +111,15 @@ namespace Dashboard.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Color")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Model")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
@@ -135,7 +130,7 @@ namespace Dashboard.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("productDetails");
+                    b.ToTable("ProductDetails");
                 });
 #pragma warning restore 612, 618
         }
