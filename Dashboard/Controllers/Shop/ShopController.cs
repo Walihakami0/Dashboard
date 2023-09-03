@@ -212,7 +212,7 @@ namespace Dashboard.Controllers.Shop
                 try
                 {
                     client.Connect("smtp.gmail.com", 587);
-                    client.Authenticate("appkits2030@gmail.com", "yinixnznjbvtgila");
+                    client.Authenticate("appkits2030@gmail.com", "Password");
                     await client.SendAsync(message);
                     client.Disconnect(true);
 
